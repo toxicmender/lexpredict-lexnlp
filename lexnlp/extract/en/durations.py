@@ -34,7 +34,8 @@ class EnDurationParser(DurationParser):
         "anniversaries": Fraction(365),
     }
 
-    DURATION_PTN = fr"(({NUM_PTN})(?:\s*(?:calendar|business|actual))?[\s-]*({'|'.join(DURATION_MAP)})s?(?!-))(?:\W|$)"
+    # allow plural forms and adjective forms like 'monthly' and 'yearly'
+    DURATION_PTN = fr"(({NUM_PTN})(?:\s*(?:calendar|business|actual))?[\s-]*({'|'.join(DURATION_MAP)})(?:s|ly)?(?!-))(?:\W|$)"
     DURATION_PTN_RE = re.compile(DURATION_PTN, re.IGNORECASE | re.MULTILINE | re.DOTALL | re.VERBOSE)
 
     INNER_CONJUNCTIONS = ['and', 'plus']
@@ -47,6 +48,17 @@ class EnDurationParser(DurationParser):
         all_annotations: List[DurationAnnotation] = []
         for match in cls.DURATION_PTN_RE.finditer(text.lower()):
             source_text, number_text, duration_type = match.groups()
+            # normalize duration type: handle adjective ('monthly' -> 'month')
+            duration_type = (duration_type or '').lower()
+            if duration_type.endswith('ly'):
+                duration_type = duration_type[:-2]
+            if duration_type.endswith('ies'):
+                duration_type = duration_type[:-3] + 'y'
+            elif duration_type.endswith('s'):
+                duration_type = duration_type[:-1]
+            if duration_type not in cls.DURATION_MAP:
+                # unknown/unsupported duration token after normalization
+                continue
             amount = list(get_amounts(number_text, float_digits=float_digits))
             if len(amount) != 1:
                 continue
