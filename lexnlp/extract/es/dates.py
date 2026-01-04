@@ -12,16 +12,14 @@ __email__ = "support@contraxsuite.com"
 
 
 # pylint: disable=bare-except
-import datetime
 import string
-from typing import Optional, Dict, Any, Generator
+from typing import Optional, Dict, Any
 import regex as re
 
 # noinspection PyUnresolvedReferences
 from dateparser.data.date_translation_data.es import info
 
 from lexnlp.extract.all_locales.languages import Locale
-from lexnlp.extract.common.annotations.date_annotation import DateAnnotation
 from lexnlp.extract.common.dates import DateParser
 
 

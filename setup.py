@@ -17,7 +17,7 @@ here = path.abspath(path.dirname(__file__))
 try:
     with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
         long_description = f.read()
-except Exception as e:
+except Exception:
     long_description = "LexPredict LexNLP: A swiss-army knife library built for working with real, unstructured legal text."
 
 setup(

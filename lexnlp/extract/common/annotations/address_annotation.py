@@ -6,7 +6,7 @@ __maintainer__ = "LexPredict, LLC"
 __email__ = "support@contraxsuite.com"
 
 
-from typing import Tuple, List, Dict, Any
+from typing import Dict, Tuple, List
 from lexnlp.extract.common.annotations.text_annotation import TextAnnotation
 
 
@@ -33,7 +33,7 @@ class AddressAnnotation(TextAnnotation):
     def get_cite_value_parts(self) -> List[str]:
         return [self.text]
 
-    def get_dictionary_values(self) -> dict:
+    def get_dictionary_values(self) -> Dict[str, Dict[str, str]]:
         df = {
             'tags': {
                 'Extracted Entity Text': self.text,

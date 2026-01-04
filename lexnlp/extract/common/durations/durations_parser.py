@@ -6,7 +6,7 @@ __maintainer__ = "LexPredict, LLC"
 __email__ = "support@contraxsuite.com"
 
 
-from typing import List, Pattern, Callable
+from typing import List
 
 from lexnlp.extract.common.annotations.duration_annotation import DurationAnnotation
 
@@ -15,13 +15,13 @@ class DurationParser:
 
     DURATION_MAP = {}
 
-    DURATION_PTN_RE = None  # type:Pattern
+    DURATION_PTN_RE = None  # type: re.Pattern[str]
 
     INNER_CONJUNCTIONS = []
 
-    INNER_PUNCTUATION = None  # type:Pattern
+    INNER_PUNCTUATION = None  # type: re.Pattern[str]
 
-    GET_AMOUNTS = None  # type:Callable
+    GET_AMOUNTS = None  # type:Callable[[argtype], returntype] from collections.abc import Callable
 
     LOCALE = 'en'
 

@@ -8,7 +8,7 @@ __maintainer__ = "LexPredict, LLC"
 __email__ = "support@contraxsuite.com"
 
 
-from typing import Pattern, List, Tuple
+from typing import List, Tuple
 # pylint: enable=unused-import
 import regex as re
 from lexnlp.extract.common import year_parser
@@ -20,9 +20,9 @@ from lexnlp.extract.common.pattern_found import PatternFound
 class CopyrightParsingMethods:
     def __init__(self):
         self.trigger_words = ''
-        self.reg_trigger_words = None  # type: Pattern
-        self.reg_word_c_years = None  # type: List[Pattern]
-        self.reg_c_years_word = None  # type: List[Pattern]
+        self.reg_trigger_words = None  # type: re.Pattern[str]
+        self.reg_word_c_years = None  # type: List[re.Pattern[str]]
+        self.reg_c_years_word = None  # type: List[re.Pattern[str]] #lint error on compile
         self.init_trigger_words()
         self.init_regexes()
 

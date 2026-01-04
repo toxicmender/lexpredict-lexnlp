@@ -7,9 +7,8 @@ __email__ = "support@contraxsuite.com"
 
 
 import regex as re
-from typing import List, Tuple, Generator
+from typing import Dict, List, Tuple, Generator
 
-from lexnlp.extract.all_locales.languages import Locale
 from lexnlp.extract.common import year_parser
 from lexnlp.extract.common.annotations.court_citation_annotation import CourtCitationAnnotation
 from lexnlp.extract.de.dates import get_dates
@@ -200,10 +199,10 @@ def get_court_citation_annotation_list(
     return parser.parse(text, language)
 
 
-def get_court_citations(text: str, language: str = 'de') -> Generator[dict, None, None]:
+def get_court_citations(text: str, language: str = 'de') -> Generator[Dict[str, object], None, None]:
     cts = parser.parse(text, language)
     for ct in cts:
-        yield ct.to_dictionary()
+        yield ct.to_dictionary() # type: ignore
 
 
 def get_court_citation_list(text: str, language: str = 'de') -> List[CourtCitationAnnotation]:

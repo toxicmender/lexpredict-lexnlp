@@ -1,7 +1,6 @@
 # Imports
 import itertools
 import tarfile
-import pandas
 import pickle
 
 # Sklearn imports
