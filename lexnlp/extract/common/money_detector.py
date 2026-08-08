@@ -37,9 +37,12 @@ class MoneyDetector:
             list(currency_token_map.values()) +
             list(currency_preffix_map.values())
         )
+        # currency prefixes should include known prefix keys and symbol keys
+        # (previously used symbol map values here which produced currency codes
+        # instead of symbol/prefix tokens and broke matching in some cases)
         self.currency_prefixes = set(
             list(currency_preffix_map.keys()) +
-            list(currency_symbol_map.values())
+            list(currency_symbol_map.keys())
         )
         self.curr_num_ptn = num_ptn.replace('(?<=\\W|^)', '')
         self.trigger_words = trigger_words  # ['price', 'cost']
